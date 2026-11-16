@@ -27,7 +27,7 @@ protected:
 	//
 
 public:
-	Enemy(color r_c, REGION r_region, int d = MaxDistance);
+	Enemy(int _id,color r_c, REGION r_region, int d = MaxDistance);
 	virtual ~Enemy();
 
 	color GetColor() const;
@@ -37,6 +37,9 @@ public:
 
 	void SetDistance(int d);
 	int GetDistance() const;
+
+	void SetID(int _id);
+	int GetID() const;
 
 	// Virtual Functions: ----------------
 

@@ -9,6 +9,7 @@ class LinkedList
     int count;
 
 public:
+    
 
     LinkedList() {
         head = tail = nullptr;
@@ -19,7 +20,7 @@ public:
 
     int getCount() { return count;}
 
-    void Insert(const T& item) {
+    void Insert(T* item) {
         Node<T>* temp = new Node<T>(item);
 
         if (head == nullptr) {
@@ -112,6 +113,16 @@ public:
         return true;
     }
 
+     int* getAllIds() {
+        int* ids = new int[count];
+        int i = 0;
+        while (head) {
+            Node<T>* temp = head;
+            ids[i++] = temp->item->GetID();
+            head = head->next;
+        }
+        return ids;
+    }
 
     ~LinkedList() {
         while (head) {

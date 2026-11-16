@@ -219,13 +219,13 @@
     <ClInclude Include="Enemies\Enemy.h">
       <Filter>Enemies</Filter>
     </ClInclude>
-    <ClInclude Include="Queue.h">
+    <ClInclude Include="DSs\LinkedList.h">
       <Filter>DSs</Filter>
     </ClInclude>
-    <ClInclude Include="Node.h">
+    <ClInclude Include="DSs\Node.h">
       <Filter>DSs</Filter>
     </ClInclude>
-    <ClInclude Include="LinkedList.h">
+    <ClInclude Include="DSs\Queue.h">
       <Filter>DSs</Filter>
     </ClInclude>
   </ItemGroup>

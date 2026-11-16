@@ -298,11 +298,11 @@
     <ClInclude Include="CMUgraphicsLib\jpeg\jpeglib.h" />
     <ClInclude Include="CMUgraphicsLib\jpeg\jversion.h" />
     <ClInclude Include="Defs.h" />
+    <ClInclude Include="DSs\LinkedList.h" />
+    <ClInclude Include="DSs\Node.h" />
+    <ClInclude Include="DSs\Queue.h" />
     <ClInclude Include="Enemies\Enemy.h" />
     <ClInclude Include="GUI\GUI.h" />
-    <ClInclude Include="LinkedList.h" />
-    <ClInclude Include="Node.h" />
-    <ClInclude Include="Queue.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
