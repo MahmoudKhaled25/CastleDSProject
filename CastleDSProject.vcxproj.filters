@@ -16,6 +16,9 @@
     <Filter Include="Enemies">
       <UniqueIdentifier>{0af33dc2-c49c-4540-b583-4c48cacf990e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="DSs">
+      <UniqueIdentifier>{7d619135-1439-44a6-9a8f-46594878416c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CMUgraphicsLib\auxil.cpp">
@@ -215,6 +218,15 @@
     </ClInclude>
     <ClInclude Include="Enemies\Enemy.h">
       <Filter>Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Queue.h">
+      <Filter>DSs</Filter>
+    </ClInclude>
+    <ClInclude Include="Node.h">
+      <Filter>DSs</Filter>
+    </ClInclude>
+    <ClInclude Include="LinkedList.h">
+      <Filter>DSs</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

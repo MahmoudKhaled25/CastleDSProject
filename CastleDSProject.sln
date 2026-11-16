@@ -1,7 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio Version 18
+VisualStudioVersion = 18.10.12224.181 stable
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CastleDSProject", "CastleDSProject.vcxproj", "{1AC3DDD7-FDDE-487E-A2A4-52A8FCF7BDB9}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DSs_Test", "..\DSs_Test\DSs_Test.vcxproj", "{9D8F69DB-0E3A-4DDD-8D52-083AE84D185B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,8 +17,15 @@ Global
 		{1AC3DDD7-FDDE-487E-A2A4-52A8FCF7BDB9}.Debug|Win32.Build.0 = Debug|Win32
 		{1AC3DDD7-FDDE-487E-A2A4-52A8FCF7BDB9}.Release|Win32.ActiveCfg = Release|Win32
 		{1AC3DDD7-FDDE-487E-A2A4-52A8FCF7BDB9}.Release|Win32.Build.0 = Release|Win32
+		{9D8F69DB-0E3A-4DDD-8D52-083AE84D185B}.Debug|Win32.ActiveCfg = Debug|Win32
+		{9D8F69DB-0E3A-4DDD-8D52-083AE84D185B}.Debug|Win32.Build.0 = Debug|Win32
+		{9D8F69DB-0E3A-4DDD-8D52-083AE84D185B}.Release|Win32.ActiveCfg = Release|Win32
+		{9D8F69DB-0E3A-4DDD-8D52-083AE84D185B}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {ACAB8FCA-7083-4343-B200-C9CF206FF53A}
 	EndGlobalSection
 EndGlobal
