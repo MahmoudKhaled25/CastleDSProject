@@ -16,6 +16,9 @@
     <Filter Include="Enemies">
       <UniqueIdentifier>{0af33dc2-c49c-4540-b583-4c48cacf990e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Files-Options">
+      <UniqueIdentifier>{208c7beb-d7f6-457e-a074-756d64168edb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CMUgraphicsLib\auxil.cpp">
@@ -140,6 +143,9 @@
     <ClCompile Include="Enemies\Enemy.cpp">
       <Filter>Enemies</Filter>
     </ClCompile>
+    <ClCompile Include="FileReading.cpp">
+      <Filter>Files-Options</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CMUgraphicsLib\auxil.h">
@@ -215,6 +221,9 @@
     </ClInclude>
     <ClInclude Include="Enemies\Enemy.h">
       <Filter>Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="FileReading.h">
+      <Filter>Files-Options</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
