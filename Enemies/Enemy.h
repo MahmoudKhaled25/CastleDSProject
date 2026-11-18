@@ -40,12 +40,12 @@ protected:
 	EnemyState State;	//The state of the enemy (active, killed, frozed, inactive)
 	double FirstShotTime; // يحسب اول مره enemy اتضرب فيها لحساب ال kill delay 
 	int MoveCounter;
-
+	double KillTime; // يحسب وقت موت ال enemy  لحساب ال kill delay
 
 public:
 	Enemy( color r_c, REGION r_region, int d = MaxDistance);
 	Enemy(int id, color r_c, REGION r_region, int d, double health, double power, int reloadPeriod, int freezeRemaining
-		, double arrivalTime, EnemyState state );
+		, double arrivalTime, EnemyState state ,double killTime);
 	virtual ~Enemy();
 
 	int GetID() const;
@@ -93,9 +93,8 @@ public:
 	virtual void Move() = 0;	//All enemies can move
 	//virtual void Act() = 0;	//Acting means fighting or healing
 
-	//
-	// TODO: Add More Member Functions As Needed
-	//
+	void SetKillTime(double time);
+	double GetKillTime() const;
 	void MoveAccordingToHealth();
 };
 
