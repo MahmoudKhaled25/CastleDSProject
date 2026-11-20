@@ -4,6 +4,9 @@
 #include <chrono>
 
 #include "Enemies\Enemy.h"
+#include "Enemies\fighter.h"
+#include "Enemies\freezer.h"
+#include "Enemies\healer.h"
 #include "Castle\Castle.h"
 
 #include "DSs\LinkedList.h"

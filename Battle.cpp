@@ -2,6 +2,8 @@
 
 #include <iostream>
 
+
+
 Battle::Battle()
 {
 	EnemyCount = 0;
@@ -9,7 +11,7 @@ Battle::Battle()
 
 void Battle::AddEnemy(Enemy* Ptr)
 {
-	if (EnemyCount < MaxEnemyCount) 
+	if (EnemyCount < MaxEnemyCount)
 		BEnemiesForDraw[EnemyCount++] = Ptr;
 
 	// Note that this function doesn't allocate any enemy objects
@@ -26,13 +28,13 @@ int* Battle::getRandomIDs(LinkedList<Enemy>* list, int& selectedCount)
 	if (list == nullptr)
 		return nullptr;
 
-	int size = list ->getCount();
+	int size = list->getCount();
 
 	uniform_int_distribution<int> countDist(1, 4);
 
 	selectedCount = countDist(gen);
 
-	int *ids = list->getAllIds();
+	int* ids = list->getAllIds();
 
 	shuffle(ids, ids + size, gen);
 
@@ -48,7 +50,7 @@ int* Battle::getRandomIDs(LinkedList<Enemy>* list, int& selectedCount)
 	return killedArr;
 }
 
-Castle * Battle::GetCastle()
+Castle* Battle::GetCastle()
 {
 	return &BCastle;
 }
@@ -68,17 +70,17 @@ void Battle::RunSimulation()
 //It should be removed in phases 1&2
 void Battle::Just_A_Demo()
 {
-	Enemy e1(1, DARKBLUE, A_REG, 6);
-	Enemy e2(2, DARKBLUE, D_REG, 60);
-	Enemy e3(3, DARKOLIVEGREEN, B_REG, 60);
-	Enemy e4(4, DARKOLIVEGREEN, A_REG, 4);
-	Enemy e5(5, ORANGERED, C_REG, 19);
-	Enemy e6(6, ORANGERED, C_REG, 30);
-	Enemy e7(6, ORANGERED, A_REG, 2);
-	Enemy e8(7, DARKOLIVEGREEN, C_REG, 7);
-	Enemy e9(8, ORANGERED, A_REG, 30);
-	Enemy e10(9, DARKBLUE, C_REG, 4);
-	Enemy e11(10, GREEN, A_REG, 20);
+	Fighter e1(1, DARKBLUE, A_REG, 6);
+	Fighter e2(2, DARKBLUE, D_REG, 60);
+	Fighter e3(3, DARKOLIVEGREEN, B_REG, 60);
+	Fighter e4(4, DARKOLIVEGREEN, A_REG, 4);
+	Freezer e5(5, ORANGERED, C_REG, 19);
+	Freezer e6(6, ORANGERED, C_REG, 30);
+	Freezer e7(6, ORANGERED, A_REG, 2);
+	Freezer e8(7, DARKOLIVEGREEN, C_REG, 7);
+	Healer e9(8, ORANGERED, A_REG, 30);
+	Healer e10(9, DARKBLUE, C_REG, 4);
+	Healer e11(10, GREEN, A_REG, 20);
 
 	LinkedList<Enemy>l1;
 	l1.Insert(&e1);
@@ -113,30 +115,30 @@ void Battle::Just_A_Demo()
 
 	delete[] killed;
 
-	
-	std::cout<<"\nWelcome to Castle Battle:\n";
-	std::cout<<"\nIn phase2, you will be asked to select game mode\n";
-	std::cout<<"\nFor now just press ENTER key to continue...";
-	
+
+	std::cout << "\nWelcome to Castle Battle:\n";
+	std::cout << "\nIn phase2, you will be asked to select game mode\n";
+	std::cout << "\nFor now just press ENTER key to continue...";
+
 	char tmp[10];
-	std::cin.getline(tmp,10);
+	std::cin.getline(tmp, 10);
 	//
 	// THIS IS JUST A DEMO
 	// IT SHOULD BE REMOVED IN PHASE 1 AND PHASE 2
 	//
-	
-	GUI * pGUI = new GUI;
+
+	GUI* pGUI = new GUI;
 
 	pGUI->PrintMessage("This is Just a Demo. It should be changed ib phase1 & phase2. Click to move to next step");
 
-	
-	 
+
+
 	// Declare some enemies and fill their data
 	// In the game, enemies should be loaded from an input file
 	// and should be dynamically allocated
-	
-	
-	
+
+
+
 
 	// Adding the enemies to the battle
 	AddEnemy(&e1);
@@ -159,7 +161,7 @@ void Battle::Just_A_Demo()
 
 	// Now a demo to move enemies some time steps
 	// TimeStep is a normal integer that is incremented each time by 1
-	for(int TimeStep = 1 ; TimeStep <= 30 ; TimeStep++)
+	for (int TimeStep = 1; TimeStep <= 30; TimeStep++)
 	{
 
 		// Decrement the distance of each enemy. Just for the sake of demo

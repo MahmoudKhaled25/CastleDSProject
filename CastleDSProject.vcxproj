@@ -271,6 +271,9 @@
     </ClCompile>
     <ClCompile Include="Demo_Main.cpp" />
     <ClCompile Include="Enemies\Enemy.cpp" />
+    <ClCompile Include="Enemies\Fighter.cpp" />
+    <ClCompile Include="Enemies\Freezer.cpp" />
+    <ClCompile Include="Enemies\Healer.cpp" />
     <ClCompile Include="GUI\GUI.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -302,6 +305,9 @@
     <ClInclude Include="DSs\Node.h" />
     <ClInclude Include="DSs\Queue.h" />
     <ClInclude Include="Enemies\Enemy.h" />
+    <ClInclude Include="Enemies\Fighter.h" />
+    <ClInclude Include="Enemies\Freezer.h" />
+    <ClInclude Include="Enemies\Healer.h" />
     <ClInclude Include="GUI\GUI.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
