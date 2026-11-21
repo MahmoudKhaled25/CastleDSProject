@@ -16,13 +16,8 @@
     <Filter Include="Enemies">
       <UniqueIdentifier>{0af33dc2-c49c-4540-b583-4c48cacf990e}</UniqueIdentifier>
     </Filter>
-<<<<<<< HEAD
-    <Filter Include="Files-Options">
-      <UniqueIdentifier>{208c7beb-d7f6-457e-a074-756d64168edb}</UniqueIdentifier>
-=======
     <Filter Include="DSs">
       <UniqueIdentifier>{7d619135-1439-44a6-9a8f-46594878416c}</UniqueIdentifier>
->>>>>>> dev
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -148,10 +143,6 @@
     <ClCompile Include="Enemies\Enemy.cpp">
       <Filter>Enemies</Filter>
     </ClCompile>
-<<<<<<< HEAD
-    <ClCompile Include="FileReading.cpp">
-      <Filter>Files-Options</Filter>
-=======
     <ClCompile Include="Enemies\Fighter.cpp">
       <Filter>Enemies</Filter>
     </ClCompile>
@@ -160,8 +151,8 @@
     </ClCompile>
     <ClCompile Include="Enemies\Healer.cpp">
       <Filter>Enemies</Filter>
->>>>>>> dev
     </ClCompile>
+    <ClCompile Include="FileReading.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CMUgraphicsLib\auxil.h">
@@ -238,10 +229,6 @@
     <ClInclude Include="Enemies\Enemy.h">
       <Filter>Enemies</Filter>
     </ClInclude>
-<<<<<<< HEAD
-    <ClInclude Include="FileReading.h">
-      <Filter>Files-Options</Filter>
-=======
     <ClInclude Include="DSs\LinkedList.h">
       <Filter>DSs</Filter>
     </ClInclude>
@@ -259,7 +246,7 @@
     </ClInclude>
     <ClInclude Include="Enemies\Healer.h">
       <Filter>Enemies</Filter>
->>>>>>> dev
     </ClInclude>
+    <ClInclude Include="FileReading.h" />
   </ItemGroup>
 </Project>
