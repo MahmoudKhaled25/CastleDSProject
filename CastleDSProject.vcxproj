@@ -79,6 +79,7 @@
       <ProgramDatabaseFile>.\Release/CastleDSProject.pdb</ProgramDatabaseFile>
       <SubSystem>Console</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
+      <ImageHasSafeExceptionHandlers>true</ImageHasSafeExceptionHandlers>
     </Link>
     <Bscmake>
       <SuppressStartupBanner>true</SuppressStartupBanner>
@@ -118,6 +119,7 @@
       <ProgramDatabaseFile>.\Debug/CastleDSProject.pdb</ProgramDatabaseFile>
       <SubSystem>Console</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
+      <ImageHasSafeExceptionHandlers>true</ImageHasSafeExceptionHandlers>
     </Link>
     <Bscmake>
       <SuppressStartupBanner>true</SuppressStartupBanner>
@@ -275,6 +277,7 @@
     <ClCompile Include="Enemies\Freezer.cpp" />
     <ClCompile Include="Enemies\Healer.cpp" />
     <ClCompile Include="GUI\GUI.cpp" />
+    <ClCompile Include="Healer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Battle.h" />
@@ -309,6 +312,8 @@
     <ClInclude Include="Enemies\Freezer.h" />
     <ClInclude Include="Enemies\Healer.h" />
     <ClInclude Include="GUI\GUI.h" />
+    <ClInclude Include="Fighter.h" />
+    <ClInclude Include="Healer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
