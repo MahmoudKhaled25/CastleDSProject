@@ -1,9 +1,9 @@
 #include "Enemy.h"
 
 
-Enemy::Enemy( color r_c, REGION r_region, int d)
+Enemy::Enemy( int id,color r_c, REGION r_region, int d)
 {
-	ID = 0;
+	ID = id;
 	Clr = r_c;
 	Region = r_region;
 	Health = 0;
@@ -16,12 +16,10 @@ Enemy::Enemy( color r_c, REGION r_region, int d)
 	FirstShotTime = 0;
 	State = INACTIVE;
 	MoveCounter = 0;
-	KillTime = 0;
 	SetDistance(d);
 }
-Enemy::Enemy(int id, color r_c, REGION r_region, int d, double health, double power, int reloadPeriod, 
-	int freezeRemaining
-	, double arrivalTime, EnemyState state ,double killTime)
+Enemy::Enemy(int id, color r_c, REGION r_region, int d, double health, double power, int reloadPeriod,
+	int freezeRemaining, double arrivalTime, EnemyState state )
 {
 	ID = id;
 	Clr = r_c;
@@ -87,7 +85,6 @@ double Enemy::GetFirstShotTime() const
 {
 	return FirstShotTime;
 }
-
 // Setters
 void Enemy::SetEnemyState(EnemyState state)
 {
@@ -160,15 +157,10 @@ int Enemy::GetDistance() const
 {
 	return Distance;
 }
-void Enemy::SetKillTime(double time)
+void Enemy::Move()
 {
-	KillTime = time;
+	DecrementDist();
 }
-double Enemy::GetKillTime() const
-{
-	return KillTime;
-}
-
 void Enemy::MoveAccordingToHealth()
 {
 	if (State != ACTIVE)

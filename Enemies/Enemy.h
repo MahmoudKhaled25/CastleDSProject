@@ -15,9 +15,9 @@ const color HEALER_CLR = ORANGERED;
 
 //Enemy State
 enum EnemyState {
-	ACTIVE , 
-	INACTIVE , 
-	KILLED , 
+	ACTIVE ,
+	INACTIVE ,
+	KILLED ,
 	FROZEN
 };
 class Enemy
@@ -32,20 +32,20 @@ protected:
 	double Health;	//Enemy health
 	double OriginalHealth;
 	double Power;	//Enemy power
-	
+
 	int ReloadPeriod;  // Relod time
-	int ReloadRemaining; 
+	int ReloadRemaining;
 	int FreezeRemaining;
 	double ArrivalTime;
 	EnemyState State;	//The state of the enemy (active, killed, frozed, inactive)
-	double FirstShotTime; // يحسب اول مره enemy اتضرب فيها لحساب ال kill delay 
+	double FirstShotTime; // يحسب اول مره enemy اتضرب فيها لحساب ال kill delay
 	int MoveCounter;
-	double KillTime; // يحسب وقت موت ال enemy  لحساب ال kill delay
+
 
 public:
-	Enemy( color r_c, REGION r_region, int d = MaxDistance);
+	Enemy( int id,color r_c, REGION r_region, int d = MaxDistance);
 	Enemy(int id, color r_c, REGION r_region, int d, double health, double power, int reloadPeriod, int freezeRemaining
-		, double arrivalTime, EnemyState state ,double killTime);
+		, double arrivalTime, EnemyState state );
 	virtual ~Enemy();
 
 	int GetID() const;
@@ -93,8 +93,9 @@ public:
 	virtual void Move() = 0;	//All enemies can move
 	//virtual void Act() = 0;	//Acting means fighting or healing
 
-	void SetKillTime(double time);
-	double GetKillTime() const;
+	//
+	// TODO: Add More Member Functions As Needed
+	//
 	void MoveAccordingToHealth();
 };
 

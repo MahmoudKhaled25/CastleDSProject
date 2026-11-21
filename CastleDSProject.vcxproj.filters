@@ -16,6 +16,9 @@
     <Filter Include="Enemies">
       <UniqueIdentifier>{0af33dc2-c49c-4540-b583-4c48cacf990e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="DSs">
+      <UniqueIdentifier>{7d619135-1439-44a6-9a8f-46594878416c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CMUgraphicsLib\auxil.cpp">
@@ -140,13 +143,13 @@
     <ClCompile Include="Enemies\Enemy.cpp">
       <Filter>Enemies</Filter>
     </ClCompile>
-    <ClCompile Include="Fighter.cpp">
+    <ClCompile Include="Enemies\Fighter.cpp">
       <Filter>Enemies</Filter>
     </ClCompile>
-    <ClCompile Include="Healer.cpp">
+    <ClCompile Include="Enemies\Freezer.cpp">
       <Filter>Enemies</Filter>
     </ClCompile>
-    <ClCompile Include="Freezer.cpp">
+    <ClCompile Include="Enemies\Healer.cpp">
       <Filter>Enemies</Filter>
     </ClCompile>
   </ItemGroup>
@@ -225,13 +228,22 @@
     <ClInclude Include="Enemies\Enemy.h">
       <Filter>Enemies</Filter>
     </ClInclude>
-    <ClInclude Include="Fighter.h">
+    <ClInclude Include="DSs\LinkedList.h">
+      <Filter>DSs</Filter>
+    </ClInclude>
+    <ClInclude Include="DSs\Node.h">
+      <Filter>DSs</Filter>
+    </ClInclude>
+    <ClInclude Include="DSs\Queue.h">
+      <Filter>DSs</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemies\Fighter.h">
       <Filter>Enemies</Filter>
     </ClInclude>
-    <ClInclude Include="Healer.h">
+    <ClInclude Include="Enemies\Freezer.h">
       <Filter>Enemies</Filter>
     </ClInclude>
-    <ClInclude Include="Freezer.h">
+    <ClInclude Include="Enemies\Healer.h">
       <Filter>Enemies</Filter>
     </ClInclude>
   </ItemGroup>
