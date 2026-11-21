@@ -1,7 +1,16 @@
 #pragma once
+#include <random>
+#include <algorithm>
+#include <chrono>
 
 #include "Enemies\Enemy.h"
+#include "Enemies\fighter.h"
+#include "Enemies\freezer.h"
+#include "Enemies\healer.h"
 #include "Castle\Castle.h"
+
+#include "DSs\LinkedList.h"
+
 
 // it is the controller of the project
 class Battle
@@ -26,6 +35,8 @@ public:
 	void AddEnemy(Enemy* Ptr);
 	Castle * GetCastle();
 	void RunSimulation();
+
+	int* getRandomIDs(LinkedList<Enemy>* list, int& selectedCount);
 
 	void Just_A_Demo();	//just to show a demo and should be removed in phase1 1 & 2
 
