@@ -10,6 +10,7 @@
 #include "Castle\Castle.h"
 
 #include "DSs\LinkedList.h"
+#include "FileReading.h"
 
 
 // it is the controller of the project
@@ -37,6 +38,9 @@ public:
 	void RunSimulation();
 
 	int* GetRandomIDs(LinkedList<Enemy>* list, int& selectedCount);
+
+
+	Enemy* CreateEnemy(const EnemyData& data);
 
 	void Just_A_Demo();	//just to show a demo and should be removed in phase1 1 & 2
 

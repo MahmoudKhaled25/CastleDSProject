@@ -184,3 +184,27 @@ void Battle::Just_A_Demo()
 
 	delete pGUI;
 }
+
+Enemy* Battle::CreateEnemy(const EnemyData& data)
+{
+	switch (data.type)
+	{
+	case 1:
+		return new Fighter(data.id, data.region,
+			MaxDistance, data.health, data.power,
+			data.reload, data.arrival);
+
+	case 2:
+		return new Healer(data.id, data.region,
+			MaxDistance, data.health, data.power,
+			data.reload, data.arrival);
+
+	case 3:
+		return new Freezer(data.id, data.region,
+			MaxDistance, data.health, data.power,
+			data.reload, data.arrival);
+
+	default:
+		return nullptr;
+	}
+}
