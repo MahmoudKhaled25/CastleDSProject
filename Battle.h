@@ -36,7 +36,7 @@ public:
 	Castle * GetCastle();
 	void RunSimulation();
 
-	int* getRandomIDs(LinkedList<Enemy>* list, int& selectedCount);
+	int* GetRandomIDs(LinkedList<Enemy>* list, int& selectedCount);
 
 	void Just_A_Demo();	//just to show a demo and should be removed in phase1 1 & 2
 

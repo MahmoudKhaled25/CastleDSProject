@@ -18,7 +18,7 @@ void Battle::AddEnemy(Enemy* Ptr)
 	// It only makes the first free pointer in the array
 	// points to the same enemy pointed to by "Ptr"
 }
-int* Battle::getRandomIDs(LinkedList<Enemy>* list, int& selectedCount)
+int* Battle::GetRandomIDs(LinkedList<Enemy>* list, int& selectedCount)
 {
 	mt19937 gen(
 		chrono::high_resolution_clock::now().time_since_epoch().count()
@@ -28,13 +28,13 @@ int* Battle::getRandomIDs(LinkedList<Enemy>* list, int& selectedCount)
 	if (list == nullptr)
 		return nullptr;
 
-	int size = list->getCount();
+	int size = list->GetCount();
 
 	uniform_int_distribution<int> countDist(1, 4);
 
 	selectedCount = countDist(gen);
 
-	int* ids = list->getAllIds();
+	int* ids = list->GetAllIds();
 
 	shuffle(ids, ids + size, gen);
 
@@ -96,7 +96,7 @@ void Battle::Just_A_Demo()
 
 	int selectedCount;
 
-	int* killed = getRandomIDs(&l1, selectedCount);
+	int* killed = GetRandomIDs(&l1, selectedCount);
 
 	if (killed == NULL)
 	{

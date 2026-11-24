@@ -14,9 +14,9 @@ public:
         count = 0;
     }
 
-    bool isEmpty(){ return front == nullptr; }
+    bool IsEmpty(){ return front == nullptr; }
 
-    int  getCount() { return count; }
+    int  GetCount() { return count; }
 
     void Enqueue(const T& item){
         Node<T>* top = new Node<T>();
