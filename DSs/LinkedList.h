@@ -19,7 +19,7 @@ public:
 
     int getCount() { return count;}
 
-    void Insert(const T& item) {
+    void Insert(T* item) {
         Node<T>* temp = new Node<T>(item);
 
         if (head == nullptr) {
@@ -33,7 +33,7 @@ public:
         count++;
     }
 
-    bool Remove(const T& item) {
+    bool Remove(T* item) {
         Node<T>* temp = head;
 
         while (temp) {
@@ -98,7 +98,7 @@ public:
         return true;
     }
 
-    bool getAt(int id, T& item) {
+    bool getAt(int id, T*& item) {
         if (id < 0 || id >= count)
             return false;
 
@@ -112,6 +112,17 @@ public:
         return true;
     }
 
+    int* getAllIds() {
+        int* ids = new int[count];
+        int i = 0;
+        Node<T>* temp = head;
+
+        while (temp) {
+            ids[i++] = temp->item->GetID();
+            temp = temp->next;
+        }
+        return ids;
+    }
 
     ~LinkedList() {
         while (head) {

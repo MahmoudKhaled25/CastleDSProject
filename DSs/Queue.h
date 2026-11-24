@@ -18,7 +18,7 @@ public:
 
     int  getCount() { return count; }
 
-    void Enqueue(const T& item){
+    void Enqueue(T* item){
         Node<T>* top = new Node<T>();
         top->item = item;
         top->next = nullptr;
@@ -33,7 +33,7 @@ public:
         count++;
     }
 
-    bool Dequeue(T& item){
+    bool Dequeue(T*& item){
         if (front == nullptr) {
             return false;
         }
@@ -49,7 +49,7 @@ public:
         return true;
     }
 
-    bool Peek(T& item){
+    bool Peek(T*& item){
         if (front == nullptr)
             return false;
         item = front->item;
@@ -62,5 +62,7 @@ public:
             front = front->next;
             delete t;
         }
+        rear = nullptr;
+        count = 0;
     }
 };
