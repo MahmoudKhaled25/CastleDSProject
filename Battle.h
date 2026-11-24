@@ -10,6 +10,7 @@
 #include "Castle\Castle.h"
 
 #include "DSs\LinkedList.h"
+#include "DSs\Queue.h"
 #include "FileReading.h"
 
 
@@ -26,6 +27,10 @@ private:
 											// to point to the current active enemies 
 											// then pass the pointers list to the GUI function
 
+
+	Queue<Enemy> InactiveEnemies;
+	LinkedList<Enemy> ActiveEnemies;
+
 	//
 	// TODO: Add More Data Members As Needed
 	//
@@ -40,9 +45,15 @@ public:
 	int* GetRandomIDs(LinkedList<Enemy>* list, int& selectedCount);
 
 
-	Enemy* CreateEnemy(const EnemyData& data);
+	Enemy* CreateEnemy(const EnemyData& data);			// to create a specific enemy due to its type chosen in the file
 
-	void Just_A_Demo();	//just to show a demo and should be removed in phase1 1 & 2
+	bool LoadEnemiesFromFile(const std::string& fileName);  // to convert the data in file into real enemies and gives real values for towers
+
+	void MoveArrivedEnemies(int currentTime); // to move inactive enemies to active state when their time is coming
+
+	void UpdateEnemiesForDraw(); 
+
+	
 
 	//
 	// TODO: Add More Member Functions As Needed
