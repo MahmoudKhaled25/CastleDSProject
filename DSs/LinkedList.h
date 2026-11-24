@@ -21,6 +21,9 @@ public:
     int GetCount() { return count;}
 
     void Insert(T* item) {
+        if (item == nullptr)
+            return;
+
         Node<T>* temp = new Node<T>(item);
 
         if (head == nullptr) {
@@ -34,7 +37,10 @@ public:
         count++;
     }
 
-    bool Remove(const T& item) {
+    bool Remove(T* item) {
+        if (item == nullptr)
+            return false;
+
         Node<T>* temp = head;
 
         while (temp) {
@@ -99,7 +105,7 @@ public:
         return true;
     }
 
-    bool GetAt(int id, T& item) {
+    bool GetAt(int id, T*& item) {
         if (id < 0 || id >= count)
             return false;
 
