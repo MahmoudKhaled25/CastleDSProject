@@ -152,6 +152,7 @@
     <ClCompile Include="Enemies\Healer.cpp">
       <Filter>Enemies</Filter>
     </ClCompile>
+    <ClCompile Include="FileReading.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CMUgraphicsLib\auxil.h">
@@ -246,5 +247,6 @@
     <ClInclude Include="Enemies\Healer.h">
       <Filter>Enemies</Filter>
     </ClInclude>
+    <ClInclude Include="FileReading.h" />
   </ItemGroup>
 </Project>
