@@ -30,6 +30,7 @@ private:
 
 	Queue<Enemy> InactiveEnemies;
 	LinkedList<Enemy> ActiveEnemies;
+	Queue<Enemy> KilledEnemies;
 
 	//
 	// TODO: Add More Data Members As Needed
@@ -41,6 +42,7 @@ public:
 	void AddEnemy(Enemy* Ptr);
 	Castle * GetCastle();
 	void RunSimulation();
+	void MoveEnemies();
 
 	int* GetRandomIDs(LinkedList<Enemy>* list, int& selectedCount);
 
@@ -52,6 +54,8 @@ public:
 	void MoveArrivedEnemies(int currentTime); // to move inactive enemies to active state when their time is coming
 
 	void UpdateEnemiesForDraw(); 
+
+	void KillRandomEnemies();
 
 	
 
