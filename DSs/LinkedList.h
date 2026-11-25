@@ -16,11 +16,14 @@ public:
         count = 0;
     }
 
-    bool isEmpty() { return head == nullptr; }
+    bool IsEmpty() { return head == nullptr; }
 
-    int getCount() { return count;}
+    int GetCount() { return count;}
 
     void Insert(T* item) {
+        if (item == nullptr)
+            return;
+
         Node<T>* temp = new Node<T>(item);
 
         if (head == nullptr) {
@@ -34,7 +37,10 @@ public:
         count++;
     }
 
-    bool Remove(const T& item) {
+    bool Remove(T* item) {
+        if (item == nullptr)
+            return false;
+
         Node<T>* temp = head;
 
         while (temp) {
@@ -99,7 +105,7 @@ public:
         return true;
     }
 
-    bool getAt(int id, T& item) {
+    bool GetAt(int id, T*& item) {
         if (id < 0 || id >= count)
             return false;
 
@@ -113,13 +119,13 @@ public:
         return true;
     }
 
-     int* getAllIds() {
+     int* GetAllIds() {
         int* ids = new int[count];
         int i = 0;
-        while (head) {
-            Node<T>* temp = head;
+        Node<T>* temp = head;
+        while (temp) {
             ids[i++] = temp->item->GetID();
-            head = head->next;
+            temp = temp->next;
         }
         return ids;
     }

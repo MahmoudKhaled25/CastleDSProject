@@ -18,7 +18,7 @@ void Battle::AddEnemy(Enemy* Ptr)
 	// It only makes the first free pointer in the array
 	// points to the same enemy pointed to by "Ptr"
 }
-int* Battle::getRandomIDs(LinkedList<Enemy>* list, int& selectedCount)
+int* Battle::GetRandomIDs(LinkedList<Enemy>* list, int& selectedCount)
 {
 	mt19937 gen(
 		chrono::high_resolution_clock::now().time_since_epoch().count()
@@ -28,13 +28,13 @@ int* Battle::getRandomIDs(LinkedList<Enemy>* list, int& selectedCount)
 	if (list == nullptr)
 		return nullptr;
 
-	int size = list->getCount();
+	int size = list->GetCount();
 
 	uniform_int_distribution<int> countDist(1, 4);
 
 	selectedCount = countDist(gen);
 
-	int* ids = list->getAllIds();
+	int* ids = list->GetAllIds();
 
 	shuffle(ids, ids + size, gen);
 
@@ -50,6 +50,68 @@ int* Battle::getRandomIDs(LinkedList<Enemy>* list, int& selectedCount)
 	return killedArr;
 }
 
+bool Battle::LoadEnemiesFromFile(const std::string& fileName)
+{
+	TowerData tower;
+	EnemyData enemies[MaxEnemyCount];
+	int count = 0;
+
+	// Step 1: Read data from file
+	if (!ReadInputFile(fileName, tower, enemies, count))
+		return false;
+
+	// Step 2: Initialize Castle
+	BCastle.SetAllTowersData(
+		tower.health,
+		tower.maxAttack,
+		tower.power
+	);
+
+	// Step 3: Create Enemy objects and enqueue them
+	for (int i = 0; i < count; i++)
+	{
+		Enemy* enemy = CreateEnemy(enemies[i]);
+
+		if (enemy == nullptr)
+			return false;
+
+		InactiveEnemies.Enqueue(enemy);
+	}
+
+	return true;
+}
+
+void Battle::MoveArrivedEnemies(int currentTime)
+{
+	Enemy* enemy = nullptr;
+
+	while (InactiveEnemies.Peek(enemy))
+	{
+		if (enemy->GetArrivalTime() > currentTime)
+			break;
+
+		InactiveEnemies.Dequeue(enemy);
+
+		enemy->SetEnemyState(ACTIVE);
+
+		ActiveEnemies.Insert(enemy);
+	}
+}
+
+void Battle::UpdateEnemiesForDraw()
+{
+	EnemyCount = ActiveEnemies.GetCount();
+
+	for (int i = 0; i < EnemyCount; i++)
+	{
+		if (!ActiveEnemies.GetAt(i, BEnemiesForDraw[i]))
+		{
+			EnemyCount = i;
+			break;
+		}
+	}
+}
+
 Castle* Battle::GetCastle()
 {
 	return &BCastle;
@@ -62,125 +124,64 @@ Castle* Battle::GetCastle()
 
 void Battle::RunSimulation()
 {
-	Just_A_Demo();
-}
+	GUI* pGUI = new GUI;
 
-
-//This is just a demo function for project introductory phase
-//It should be removed in phases 1&2
-void Battle::Just_A_Demo()
-{
-	Fighter e1(1, DARKBLUE, A_REG, 6);
-	Fighter e2(2, DARKBLUE, D_REG, 60);
-	Fighter e3(3, DARKOLIVEGREEN, B_REG, 60);
-	Fighter e4(4, DARKOLIVEGREEN, A_REG, 4);
-	Freezer e5(5, ORANGERED, C_REG, 19);
-	Freezer e6(6, ORANGERED, C_REG, 30);
-	Freezer e7(6, ORANGERED, A_REG, 2);
-	Freezer e8(7, DARKOLIVEGREEN, C_REG, 7);
-	Healer e9(8, ORANGERED, A_REG, 30);
-	Healer e10(9, DARKBLUE, C_REG, 4);
-	Healer e11(10, GREEN, A_REG, 20);
-
-	LinkedList<Enemy>l1;
-	l1.Insert(&e1);
-	l1.Insert(&e2);
-	l1.Insert(&e3);
-	l1.Insert(&e4);
-	l1.Insert(&e5);
-	l1.Insert(&e6);
-	l1.Insert(&e7);
-	l1.Insert(&e8);
-	l1.Insert(&e9);
-	l1.Insert(&e10);
-
-	int selectedCount;
-
-	int* killed = getRandomIDs(&l1, selectedCount);
-
-	if (killed == NULL)
+	// Step 1: Load enemies from input file
+	if (!LoadEnemiesFromFile("TestFiles/TestFile1.txt"))
 	{
-		cout << "Not enough IDs" << endl;
+		pGUI->PrintMessage("Error loading input file!");
+		delete pGUI;
 		return;
 	}
 
-	cout << "Random IDs: ";
-
-	for (int i = 0; i < selectedCount; i++)
-	{
-		cout << killed[i] << " ";
-	}
-
-	cout << endl;
-
-	delete[] killed;
-
-
-	std::cout << "\nWelcome to Castle Battle:\n";
-	std::cout << "\nIn phase2, you will be asked to select game mode\n";
-	std::cout << "\nFor now just press ENTER key to continue...";
-
-	char tmp[10];
-	std::cin.getline(tmp, 10);
-	//
-	// THIS IS JUST A DEMO
-	// IT SHOULD BE REMOVED IN PHASE 1 AND PHASE 2
-	//
-
-	GUI* pGUI = new GUI;
-
-	pGUI->PrintMessage("This is Just a Demo. It should be changed ib phase1 & phase2. Click to move to next step");
-
-
-
-	// Declare some enemies and fill their data
-	// In the game, enemies should be loaded from an input file
-	// and should be dynamically allocated
-
-
-
-
-	// Adding the enemies to the battle
-	AddEnemy(&e1);
-	AddEnemy(&e2);
-	AddEnemy(&e3);
-	AddEnemy(&e4);
-	AddEnemy(&e5);
-	AddEnemy(&e6);
-	AddEnemy(&e7);
-	AddEnemy(&e8);
-	AddEnemy(&e9);
-	AddEnemy(&e10);
-	AddEnemy(&e11);
-
-	// Drawing the battle
-	pGUI->DrawBattle(BEnemiesForDraw, EnemyCount);
-
+	int currentTime = 0;
 	Point p;
-	pGUI->GetPointClicked(p);
 
-	// Now a demo to move enemies some time steps
-	// TimeStep is a normal integer that is incremented each time by 1
-	for (int TimeStep = 1; TimeStep <= 30; TimeStep++)
+	// Step 2: Process arrival of enemies
+	while (!InactiveEnemies.IsEmpty())
 	{
+		MoveArrivedEnemies(currentTime);
 
-		// Decrement the distance of each enemy. Just for the sake of demo
-		e1.DecrementDist();
-		e2.DecrementDist();
-		e3.DecrementDist();
-		e4.DecrementDist();
-		e5.DecrementDist();
-		e6.DecrementDist();
-		e7.DecrementDist();
-		e8.DecrementDist();
-		e9.DecrementDist();
-		e10.DecrementDist();
+		// Step 3: Prepare enemies for GUI
+		UpdateEnemiesForDraw();
 
-		// Redraw the enemies
+		// Step 4: Draw current battle state
 		pGUI->DrawBattle(BEnemiesForDraw, EnemyCount);
 
+		pGUI->PrintMessage(
+			"Time Step: " + std::to_string(currentTime)
+		);
+
 		pGUI->GetPointClicked(p);
+
+		currentTime++;
 	}
 
 	delete pGUI;
+}
+
+
+
+Enemy* Battle::CreateEnemy(const EnemyData& data)
+{
+	switch (data.type)
+	{
+	case 1:
+		return new Fighter(data.id, data.region,
+			MaxDistance, data.health, data.power,
+			data.reload, data.arrival);
+
+	case 2:
+		return new Healer(data.id, data.region,
+			MaxDistance, data.health, data.power,
+			data.reload, data.arrival);
+
+	case 3:
+		return new Freezer(data.id, data.region,
+			MaxDistance, data.health, data.power,
+			data.reload, data.arrival);
+
+	default:
+		return nullptr;
+	}
 }

@@ -14,14 +14,19 @@ public:
         count = 0;
     }
 
-    bool isEmpty(){ return front == nullptr; }
+    bool IsEmpty(){ return front == nullptr; }
 
-    int  getCount() { return count; }
+    int  GetCount() { return count; }
 
-    void Enqueue(const T& item){
-        Node<T>* top = new Node<T>();
-        top->item = item;
-        top->next = nullptr;
+    void Enqueue(T* item){
+
+
+        if (item == nullptr)
+            return;
+
+
+        Node<T>* top = new Node<T>(item);
+       
 
         if (front == nullptr) {
             front = rear = top;
@@ -33,7 +38,7 @@ public:
         count++;
     }
 
-    bool Dequeue(T& item){
+    bool Dequeue(T*& item){
         if (front == nullptr) {
             return false;
         }
@@ -49,7 +54,7 @@ public:
         return true;
     }
 
-    bool Peek(T& item){
+    bool Peek(T*& item){
         if (front == nullptr)
             return false;
         item = front->item;
@@ -62,5 +67,7 @@ public:
             front = front->next;
             delete t;
         }
+        rear = nullptr;
+        count = 0;
     }
 };
