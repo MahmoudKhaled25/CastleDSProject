@@ -73,13 +73,13 @@ public:
         return false;
     }
 
-    bool RemoveAt(int id) {
-        if (id < 0 || id >= count)
+    bool RemoveAt(int index) {
+        if (index < 0 || index >= count)
             return false;
 
         Node<T>* temp = head;
 
-        for (int i = 0; i < id; i++) {
+        for (int i = 0; i < index; i++) {
             temp = temp->next;
         }
 
@@ -105,13 +105,47 @@ public:
         return true;
     }
 
-    bool GetAt(int id, T*& item) {
-        if (id < 0 || id >= count)
+    T* RemoveWithID(int id) {
+        if (IsEmpty()) return NULL;
+
+        Node<T>* temp = head;
+
+        while (temp) {
+            if(temp->item->GetID()==id)
+            {
+                if (head == tail) {
+                    head = tail = NULL;
+                }
+                else if (head == temp) {
+                    head = temp->next;
+                    temp->next->prev = NULL;
+                }
+                else if (tail == temp) {
+                    tail = temp->prev;
+                    temp->prev->next = NULL;
+                }
+                else {
+                    temp->prev->next = temp->next;
+                    temp->next->prev = temp->prev;
+                }
+                count--;
+                break;
+            }
+            temp = temp->next;
+        }
+        if (temp) return temp->item;
+        else return NULL;
+        
+
+    }
+
+    bool GetAt(int index, T*& item) {
+        if (index < 0 || index >= count)
             return false;
 
         Node<T>* temp = head;
 
-        for (int i = 0; i < id; i++) {
+        for (int i = 0; i < index; i++) {
             temp = temp->next;
         }
 

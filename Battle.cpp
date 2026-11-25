@@ -35,6 +35,10 @@ int* Battle::GetRandomIDs(LinkedList<Enemy>* list, int& selectedCount)
 	selectedCount = countDist(gen);
 
 	int* ids = list->GetAllIds();
+	if (ids == NULL) {
+		selectedCount = 0;
+		return NULL;
+	}
 
 	shuffle(ids, ids + size, gen);
 
@@ -48,6 +52,20 @@ int* Battle::GetRandomIDs(LinkedList<Enemy>* list, int& selectedCount)
 	delete[] ids;
 
 	return killedArr;
+}
+
+void Battle::KillRandomEnemies()
+{
+	if (ActiveEnemies.GetCount() <= 5)
+		return;
+	int selectedCount;
+	int * ids = GetRandomIDs(&ActiveEnemies, selectedCount);
+	for (int i = 0; i < selectedCount; i++) {
+		Enemy* killed = ActiveEnemies.RemoveWithID(ids[i]);
+		if (killed)
+			KilledEnemies.Enqueue(killed);
+	}
+	delete[] ids;
 }
 
 bool Battle::LoadEnemiesFromFile(const std::string& fileName)
@@ -112,6 +130,20 @@ void Battle::UpdateEnemiesForDraw()
 	}
 }
 
+void Battle::MoveEnemies()
+{
+	Enemy* pEnemy = nullptr;
+	int count = ActiveEnemies.GetCount();
+
+	for (int i = 0; i < count; i++)
+	{
+		if (ActiveEnemies.GetAt(i, pEnemy) && pEnemy != nullptr)
+		{
+			pEnemy->DecrementDist();
+		}
+	}
+}
+
 Castle* Battle::GetCastle()
 {
 	return &BCastle;
@@ -134,11 +166,13 @@ void Battle::RunSimulation()
 		return;
 	}
 
-	int currentTime = 0;
+	int currentTime = 0,endTime = 75;
 	Point p;
+	int selectedCountToKill;
+	int* ids;
 
 	// Step 2: Process arrival of enemies
-	while (!InactiveEnemies.IsEmpty())
+	while (currentTime <= endTime)
 	{
 		MoveArrivedEnemies(currentTime);
 
@@ -155,6 +189,11 @@ void Battle::RunSimulation()
 		pGUI->GetPointClicked(p);
 
 		currentTime++;
+		if (ActiveEnemies.GetCount() > 10 && currentTime%4 == 0)
+			KillRandomEnemies();
+
+		MoveEnemies();
+
 	}
 
 	delete pGUI;
