@@ -4,9 +4,13 @@
 
 
 
+
 Battle::Battle()
 {
 	EnemyCount = 0;
+
+	for (int i = 0; i < NoOfRegions; i++)
+		KilledCount[i] = 0;
 }
 
 void Battle::AddEnemy(Enemy* Ptr)
@@ -59,11 +63,15 @@ void Battle::KillRandomEnemies()
 	if (ActiveEnemies.GetCount() <= 5)
 		return;
 	int selectedCount;
-	int * ids = GetRandomIDs(&ActiveEnemies, selectedCount);
+	int* ids = GetRandomIDs(&ActiveEnemies, selectedCount);
 	for (int i = 0; i < selectedCount; i++) {
 		Enemy* killed = ActiveEnemies.RemoveWithID(ids[i]);
 		if (killed)
+		{
+			killed->SetEnemyState(KILLED);
+			KilledCount[killed->GetRegion()]++;
 			KilledEnemies.Enqueue(killed);
+		}
 	}
 	delete[] ids;
 }
@@ -153,6 +161,33 @@ Castle* Battle::GetCastle()
 
 
 
+void Battle::PrintStatus(GUI* pGUI, int currentTime)
+{
+	// count active enemies per region
+	int activeCount[NoOfRegions] = { 0, 0, 0, 0 };
+	Enemy* pEnemy = nullptr;
+	for (int i = 0; i < ActiveEnemies.GetCount(); i++)
+		if (ActiveEnemies.GetAt(i, pEnemy))
+			activeCount[pEnemy->GetRegion()]++;
+
+	const char names[NoOfRegions] = { 'A', 'B', 'C', 'D' };
+	string lines[NoOfRegions + 1];
+
+	lines[0] = "Time step: " + to_string(currentTime);
+
+	for (int r = 0; r < NoOfRegions; r++)
+	{
+		REGION reg = (REGION)r;
+		lines[r + 1] = string("Region ") + names[r]
+			+ " | Tower HP: " + to_string((int)BCastle.GetTowerHealth(reg))
+			+ " | Power: " + to_string((int)BCastle.GetTowerPower(reg))
+			+ " | N: " + to_string(BCastle.GetTowerMaxEnemies(reg))
+			+ " | Active: " + to_string(activeCount[r])
+			+ " | Killed: " + to_string(KilledCount[r]);
+	}
+
+	pGUI->PrintLines(lines, NoOfRegions + 1);
+}
 
 void Battle::RunSimulation()
 {
@@ -182,9 +217,7 @@ void Battle::RunSimulation()
 		// Step 4: Draw current battle state
 		pGUI->DrawBattle(BEnemiesForDraw, EnemyCount);
 
-		pGUI->PrintMessage(
-			"Time Step: " + std::to_string(currentTime)
-		);
+		PrintStatus(pGUI, currentTime);
 
 		pGUI->GetPointClicked(p);
 

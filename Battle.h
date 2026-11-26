@@ -12,7 +12,7 @@
 #include "DSs\LinkedList.h"
 #include "DSs\Queue.h"
 #include "FileReading.h"
-
+#include "GUI\GUI.h"   
 
 // it is the controller of the project
 class Battle
@@ -31,7 +31,7 @@ private:
 	Queue<Enemy> InactiveEnemies;
 	LinkedList<Enemy> ActiveEnemies;
 	Queue<Enemy> KilledEnemies;
-
+	int KilledCount[NoOfRegions];      // killed enemies so far, per region
 	//
 	// TODO: Add More Data Members As Needed
 	//
@@ -39,6 +39,7 @@ private:
 public:
 	
 	Battle();
+	void PrintStatus(GUI* pGUI, int currentTime);
 	void AddEnemy(Enemy* Ptr);
 	Castle * GetCastle();
 	void RunSimulation();
