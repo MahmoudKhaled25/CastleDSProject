@@ -72,6 +72,8 @@ public:
 
 	//void DrawMenu() const;	// draws the game menu
 
-	void DrawBattle(Enemy* enemies[],int size) const;		//Drwas ALL the battle
+	void DrawBattle(Enemy* enemies[],int size) const;		//Drwas ALL the battlez
+	void PrintLines(const string lines[], int count) const;  // prints several lines in the status bar
+
 };
 

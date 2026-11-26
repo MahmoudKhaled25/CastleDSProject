@@ -270,3 +270,14 @@ void GUI::DrawBattle(Enemy* enemies[],int size) const
 	DrawEnemies(enemies, size);
 }
 
+// Clears the status bar and prints each string on its own line (max 5 lines fit)
+void GUI::PrintLines(const string lines[], int count) const
+{
+	ClearStatusBar();
+
+	pWind->SetPen(DARKRED);
+	pWind->SetFont(18, BOLD, BY_NAME, "Arial");
+
+	for (int i = 0; i < count; i++)
+		pWind->DrawString(10, WindHeight - StatusBarHeight + 8 + i * 24, lines[i]);
+}
